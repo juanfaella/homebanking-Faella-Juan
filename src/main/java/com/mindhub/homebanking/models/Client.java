@@ -24,7 +24,6 @@ public class Client {
         account.setClient(this);
         accounts.add(account);
     }
-
     public Client(){
     }
 

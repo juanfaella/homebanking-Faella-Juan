@@ -38,7 +38,7 @@ public class AccountDTO {
         return id;
     }
 
-    public Set<TransactionDTO> getTransactionIds() {
+    public Set<TransactionDTO> getTransaction() {
         return transaction;
     }
 }

@@ -23,8 +23,10 @@ public class AccountController {
 
     @GetMapping("/")
     public ResponseEntity<List<AccountDTO>> getAllAccounts() {
-        List<Account> accounts = (List<Account>) accountRepository.findAll();
-        return new ResponseEntity<>(accounts.stream().map(AccountDTO::new).collect(Collectors.toList()), HttpStatus.OK);
+        List<Account> accounts = accountRepository.findAll();
+        return new ResponseEntity<>(accounts.stream()
+                .map(AccountDTO::new)
+                .collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

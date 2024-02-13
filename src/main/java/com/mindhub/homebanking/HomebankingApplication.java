@@ -6,7 +6,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import javax.sound.midi.Soundbank;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Set;
 
 @SpringBootApplication
@@ -16,10 +19,11 @@ public class HomebankingApplication {
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
 @Bean
-	public CommandLineRunner initData(ClientLoanRepository clientLoanRepository, ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository){
+	public CommandLineRunner initData(CardRepository cardRepository,ClientLoanRepository clientLoanRepository, ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository){
 		return args -> {
 			LocalDate date = LocalDate.now();
 			LocalDate pushdate = LocalDate.now().plusDays(1);
+			LocalDate pushdateYear = LocalDate.now().plusYears(5);
 			Client client1 = new Client("Juan", "faella", "juan@gmail.com" );
 			Client client2 = new Client("Melba", "Morel", "melba@mindhub.com"  );
 			clientRepository.save(client1);
@@ -68,8 +72,17 @@ public class HomebankingApplication {
 			clientLoanRepository.save(clientLoan2);
 			clientLoanRepository.save(clientLoan3);
 			clientLoanRepository.save(clientLoan4);
-			System.out.println(client1);
+			Card debitCard = new Card("3325-6745-7876-4445",CardType.DEBIT, CardColor.GOLD,client2.getName()+" "+client2.getLastName(), 990, date, pushdateYear);
+			Card creditCard = new Card("2234-6745-552-7888",CardType.CREDIT, CardColor.TITANIUM,client2.getName()+" "+client2.getLastName(), 750, date, pushdateYear);
+			Card debitCardJuan = new Card("2214-6445-552-9888",CardType.DEBIT, CardColor.TITANIUM,client1.getName()+" "+client1.getLastName(), 999, date, pushdateYear);
+			client2.addClientCard(debitCard);
+			client2.addClientCard(creditCard);
+			client1.addClientCard(debitCardJuan);
+			cardRepository.save(debitCard);
+			cardRepository.save(creditCard);
+			cardRepository.save(debitCardJuan);
+			clientRepository.save(client2);
+			clientRepository.save(client1);
 		};
 	}
 }
-                                                 

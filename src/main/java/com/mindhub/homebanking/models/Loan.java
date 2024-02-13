@@ -62,14 +62,5 @@ public class Loan {
     public Loan() {
     }
 
-//    @Override
-//    public String toString() {
-//        return "Loan{" +
-//                "id=" + id +
-//                ", name='" + name + '\'' +
-//                ", maxAccount=" + maxAccount +
-//                ", payments=" + payments +
-//                '}';
-//    }
 
 }

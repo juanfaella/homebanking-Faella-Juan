@@ -1,5 +1,6 @@
 package com.mindhub.homebanking.controllers;
 
+import com.mindhub.homebanking.dtos.CardDTO;
 import com.mindhub.homebanking.dtos.ClientDTO;
 import com.mindhub.homebanking.dtos.ClientLoanDTO;
 import com.mindhub.homebanking.models.Client;
@@ -44,6 +45,10 @@ public class ClientController {
                 .map(ClientLoanDTO::new)
                 .collect(Collectors.toList());
         clientDTO.setClientLoans(clientLoanDTOs);
+        List<CardDTO> cardDTOs = client.getCards().stream()
+                .map(CardDTO::new)
+                .collect(Collectors.toList());
+        clientDTO.setCards(cardDTOs);
         return new ResponseEntity<>(clientDTO, HttpStatus.OK);
     }
  }

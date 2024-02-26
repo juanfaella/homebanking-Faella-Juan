@@ -4,7 +4,7 @@ import GetCards from '../components/GetCards'
 import { Link } from 'react-router-dom'
 
 const CardsView = () => {
-  const client = getdata(1)
+  const client = getdata(2)
   console.log(client)
   const renderCards= () => {
     if (!client || !client.cards || client.cards.length === 0) {

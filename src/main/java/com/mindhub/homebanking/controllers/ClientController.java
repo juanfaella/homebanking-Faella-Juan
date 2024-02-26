@@ -10,6 +10,7 @@ import com.mindhub.homebanking.repositories.LoanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,5 +49,10 @@ public class ClientController {
                 .collect(Collectors.toList());
         clientDTO.setCards(cardDTOs);
         return new ResponseEntity<>(clientDTO, HttpStatus.OK);
+    }
+    @GetMapping("/test")
+    public ResponseEntity<?>test(){
+        String mail = SecurityContextHolder.getContext().getAuthentication().getName();
+        return ResponseEntity.ok("Hello" + mail);
     }
  }

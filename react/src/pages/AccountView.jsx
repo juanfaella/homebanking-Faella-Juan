@@ -2,10 +2,11 @@ import React from "react";
 import { getdata } from "../utils/getData";
 import GetAccounts from "../components/GetAccounts";
 import GetTransaction from "../components/GetTransactions";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const AccountsView = () => {
     const client = getdata(1)
+    const profile = useParams()
     const renderAccounts = () => {
       if (!client.account || client.account.length === 0) {
         return <div>Loading...</div>

@@ -34,6 +34,10 @@ public class Client {
         return cards;
     }
 
+    private String password;
+
+    private String role;
+
 
     public void addAccount(Account account){
         account.setClient(this);
@@ -48,14 +52,34 @@ public class Client {
         card.setClient(this);
         cards.add(card);
     }
-    public Client(){
+
+    public Client() {
     }
 
-    public Client(String name, String lastName, String email) {
+    public Client(String name, String lastName, String email, String password) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
+        this.role = role;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public Set<Loan> getLoans() {
         return loans;
     }

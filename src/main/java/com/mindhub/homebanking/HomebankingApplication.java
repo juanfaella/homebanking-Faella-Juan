@@ -2,30 +2,36 @@ package com.mindhub.homebanking;
 
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.sound.midi.Soundbank;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Set;
 
 @SpringBootApplication
 public class HomebankingApplication {
-
+@Autowired
+	private PasswordEncoder passwordEncoder;
 	public static void main(String[] args) {
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
 @Bean
-	public CommandLineRunner initData(CardRepository cardRepository,ClientLoanRepository clientLoanRepository, ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository){
+	public CommandLineRunner initData(CardRepository cardRepository,
+									  ClientLoanRepository clientLoanRepository,
+									  ClientRepository clientRepository,
+									  AccountRepository accountRepository,
+									  TransactionRepository transactionRepository,
+									  LoanRepository loanRepository){
 		return args -> {
 			LocalDate date = LocalDate.now();
 			LocalDate pushdate = LocalDate.now().plusDays(1);
 			LocalDate pushdateYear = LocalDate.now().plusYears(5);
-			Client client1 = new Client("Juan", "faella", "juan@gmail.com" );
-			Client client2 = new Client("Melba", "Morel", "melba@mindhub.com"  );
+			Client client1 = new Client("Juan", "faella", "juan@gmail.com", passwordEncoder.encode("123"));
+			Client client2 = new Client("Melba", "Morel", "melba@mindhub.com", passwordEncoder.encode("1234")  );
 			clientRepository.save(client1);
 			clientRepository.save(client2);
 			Account account1 = new Account("VIN001", 5000.00, date);

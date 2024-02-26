@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
-import { data } from "autoprefixer";
 import { Link } from "react-router-dom";
 
 const NewLoan = () => {

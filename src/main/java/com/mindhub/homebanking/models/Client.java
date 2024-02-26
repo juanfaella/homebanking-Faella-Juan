@@ -36,7 +36,7 @@ public class Client {
 
     private String password;
 
-    private String role;
+    private String role = "CLIENT";
 
 
     public void addAccount(Account account){
@@ -61,7 +61,6 @@ public class Client {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.role = role;
     }
 
     public String getPassword() {

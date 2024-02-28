@@ -1,5 +1,4 @@
 package com.mindhub.homebanking.Services;
-
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ public class UserDetailsServiceImpl  implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
-        var client = clientRepository.findByEmail(username);
+        Client client = clientRepository.findByEmail(username);
         if (client == null){
             throw new UsernameNotFoundException(username);
         }

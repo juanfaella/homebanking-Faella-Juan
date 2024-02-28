@@ -2,7 +2,6 @@
 import React from 'react' 
 import { BrowserRouter, Route, Router, Routes } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
-import AccountView from './pages/AccountView'
 import CardsView from './pages/CardsView'
 import Home from './pages/Home'
 import LoansView from './pages/LoansView'
@@ -22,7 +21,6 @@ function App() {
         <Header/>
           <Routes>
             <Route path='' element={<Home/>}/>
-            <Route path='/accounts' element={<AccountView/>}/>
             <Route path='/transaction' element={<Transactions/>}/>
             <Route path='/cards' element={<CardsView/>}/>
             <Route path='/home' element={<Home/>}/>

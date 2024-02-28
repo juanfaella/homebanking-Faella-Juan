@@ -2,9 +2,7 @@ package com.mindhub.homebanking.models;
 
 import jakarta.persistence.*;
 
-import javax.naming.Name;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 public class Card {

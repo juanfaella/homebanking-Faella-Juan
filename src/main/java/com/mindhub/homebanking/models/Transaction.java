@@ -8,10 +8,11 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String description;
+    private String sourceAccountNumber;
     @Enumerated(EnumType.STRING)
     private TransactionType type;
-
+    private String destinationAccountNumber;
     private Double amount;
 
 
@@ -19,16 +20,27 @@ public class Transaction {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    public Transaction() {
-    }
-
-    public Transaction(TransactionType type, Double amount, LocalDateTime date) {
+    public Transaction(TransactionType type, Double amount, LocalDateTime date, String description, String destinationAccountNumber,String sourceAccountNumber) {
         this.type = type;
         this.amount = amount;
+        this.description = description;
+        this.destinationAccountNumber = destinationAccountNumber;
+        this.sourceAccountNumber = sourceAccountNumber;
+    }
+
+    public String getSourceAccountNumber() {
+        return sourceAccountNumber;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public Long getId() {
         return id;
+    }
+    public String getDestinationAccountNumber() {
+        return destinationAccountNumber;
     }
 
     public TransactionType getType() {
@@ -64,4 +76,5 @@ public class Transaction {
                 ", amount=" + amount +
                 '}';
     }
+
 }

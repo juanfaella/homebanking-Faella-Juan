@@ -46,18 +46,6 @@ public static void main(String[] args) {
 			accountRepository.save(account2);
 			accountRepository.save(account3);
 			accountRepository.save(account4);
-			Transaction transaction1 = new Transaction(TransactionType.CREDIT, 1000.00, date.atStartOfDay());
-			Transaction transaction2 = new Transaction(TransactionType.DEBIT, 500.00, pushdate.atStartOfDay());
-			Transaction transaction3 = new Transaction(TransactionType.CREDIT, 2000.00, date.atStartOfDay());
-			Transaction transaction4 = new Transaction(TransactionType.DEBIT, 1000.00, pushdate.atStartOfDay());
-			account1.addTransaction(transaction1);
-			account2.addTransaction(transaction2);
-			account3.addTransaction(transaction3);
-			account4.addTransaction(transaction4);
-			transactionRepository.save(transaction1);
-			transactionRepository.save(transaction2);
-			transactionRepository.save(transaction3);
-			transactionRepository.save(transaction4);
 			Loan loan1 = new Loan("Mortgage", 500.000, Set.of(12,24,36,48,60));
 			Loan loan2 = new Loan("Personal", 100.000, Set.of(6,12,24));
 			Loan loan3 = new Loan("Automotive", 300.000, Set.of(6,12,24,36));

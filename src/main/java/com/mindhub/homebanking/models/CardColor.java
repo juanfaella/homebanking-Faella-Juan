@@ -6,4 +6,3 @@ public enum CardColor {
     PLATINUM,
     TITANIUM
 }
-git stagit 

@@ -1,28 +1,94 @@
 package com.mindhub.homebanking.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name, lastName, email;
+
+    @OneToMany(mappedBy ="client", fetch=FetchType.EAGER)
+    private Set<Account> accounts = new HashSet<>();
+
+    public Set<Account> getAccounts(){
+        return accounts;
+    }
+
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    private Set<Loan> loans= new HashSet<>();
+
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    private Set<ClientLoan> clientLoans= new HashSet<>();
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    private List<Card> cards = new ArrayList<>();
+
+    public List<Card> getCards() {
+        return cards;
+    }
+
+    private String password;
+
+    private String role = "CLIENT";
+
+
+    public void addAccount(Account account){
+        account.setClient(this);
+        accounts.add(account);
+    }
+    public void addClientLoan(ClientLoan clientLoan) {
+        clientLoan.setClient(this);
+        clientLoans.add(clientLoan);
+    }
+
+    public void addClientCard(Card card){
+        card.setClient(this);
+        cards.add(card);
+    }
 
     public Client() {
     }
 
-    public Client(String name, String lastName, String email) {
+    public Client(String name, String lastName, String email, String password) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Set<Loan> getLoans() {
+        return loans;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public Set<ClientLoan> getClientLoans() {
+        return clientLoans;
     }
 
     public String getName() {
@@ -49,13 +115,14 @@ public class Client {
         this.email = email;
     }
 
+
     @Override
     public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+        return "Client{" +
+                "name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", accounts=" + accounts +
                 '}';
     }
 }

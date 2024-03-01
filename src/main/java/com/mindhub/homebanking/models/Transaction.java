@@ -1,6 +1,8 @@
 package com.mindhub.homebanking.models;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,18 +16,24 @@ public class Transaction {
     private TransactionType type;
     private String destinationAccountNumber;
     private Double amount;
+    private LocalDateTime date;
+
 
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id")
     private Account account;
 
-    public Transaction(TransactionType type, Double amount, LocalDateTime date, String description, String destinationAccountNumber,String sourceAccountNumber) {
+    public Transaction(TransactionType type, Double amount,String description,LocalDateTime date, String sourceAccountNumber, String destinationAccountNumber) {
         this.type = type;
         this.amount = amount;
         this.description = description;
-        this.destinationAccountNumber = destinationAccountNumber;
+        this.date = date;
         this.sourceAccountNumber = sourceAccountNumber;
+        this.destinationAccountNumber = destinationAccountNumber;
+    }
+
+    public Transaction() {
     }
 
     public String getSourceAccountNumber() {

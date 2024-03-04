@@ -25,8 +25,6 @@ public class ClientLoan {
         this.loan = loan;
     }
 
-    public ClientLoan(ClientLoan clientLoan) {
-    }
 
     public Long getId() {
         return id;

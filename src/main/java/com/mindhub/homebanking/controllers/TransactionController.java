@@ -64,9 +64,16 @@ public class TransactionController {
         origin.setBalance(origin.getBalance() - newTransactionDTO.amount());
         destination.setBalance(destination.getBalance() + newTransactionDTO.amount());
 
-        Transaction transactionOrigin = new Transaction(TransactionType.DEBIT, (-newTransactionDTO.amount()), newTransactionDTO.description(),LocalDateTime.now(), newTransactionDTO.sourceAccountNumber(), newTransactionDTO.destinationAccountNumber());
+        Transaction transactionOrigin = new Transaction(TransactionType.DEBIT, (-newTransactionDTO.amount()),
+                newTransactionDTO.description(),LocalDateTime.now(), newTransactionDTO.sourceAccountNumber(),
+                newTransactionDTO.destinationAccountNumber());
+
         origin.addTransaction(transactionOrigin);
-        Transaction transactionDestination = new Transaction(TransactionType.CREDIT, newTransactionDTO.amount(), newTransactionDTO.description(),LocalDateTime.now(), newTransactionDTO.sourceAccountNumber(), newTransactionDTO.destinationAccountNumber());
+
+        Transaction transactionDestination = new Transaction(TransactionType.CREDIT, newTransactionDTO.amount(),
+                newTransactionDTO.description(),LocalDateTime.now(), newTransactionDTO.sourceAccountNumber(),
+                newTransactionDTO.destinationAccountNumber());
+
         destination.addTransaction(transactionDestination);
 
         transactionRepository.save(transactionOrigin);

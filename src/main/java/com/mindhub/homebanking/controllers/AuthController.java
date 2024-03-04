@@ -48,14 +48,15 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterDTO registerDTO){
         if (registerDTO.getFirstName().isBlank()){
-            return new ResponseEntity<>( "The name field must no be empty",HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>( "The name field must no be empty",HttpStatus.BAD_REQUEST);
         }
         if (registerDTO.getLastName().isBlank()){
-            return new ResponseEntity<>( "The LastName field must no be empty",HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>( "The LastName field must no be empty",HttpStatus.BAD_REQUEST);
         }
         if (registerDTO.getPassword().isBlank()){
-            return new ResponseEntity<>( "The password field must no be empty",HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>( "The password field must no be empty",HttpStatus.BAD_REQUEST);
         }
+
         Client client = new Client(
                 registerDTO.getFirstName(),
                 registerDTO.getLastName(),
@@ -63,11 +64,13 @@ public class AuthController {
                 passwordEncoder.encode(registerDTO.getPassword()));
 
         clientRepository.save(client);
-        String accountNumber = generateAccountNUmber();
+        String accountNumber = generateAccountNumber();
         Account account = new Account(accountNumber, 0.0, LocalDate.now());
+        client.addAccount(account);
         return ResponseEntity.ok(client);
+
     }
-    private String generateAccountNUmber(){
+    private String generateAccountNumber(){
         Random random = new Random();
         int accountNumberSuffix = 100000 + random.nextInt(900000);
         return "VIN-" + accountNumberSuffix;

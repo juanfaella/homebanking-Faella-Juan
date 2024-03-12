@@ -14,22 +14,22 @@ public class Loan {
     private double maxAccount;
     @ElementCollection
     private Set<Integer> payments = new HashSet<>();
-
-    @ManyToOne
-    private Client client;
+    @OneToMany(mappedBy = "loan")
+    private Set<ClientLoan> clientLoans = new HashSet<>();
 
     public Loan(String name, double maxAccount, Set<Integer> payments) {
         this.name = name;
         this.maxAccount = maxAccount;
         this.payments = payments;
     }
-    public void setClient(Client client) {
-        this.client = client;
-    }
-    public Client getClient() {
-        return client;
+
+    public Set<ClientLoan> getClientLoans() {
+        return clientLoans;
     }
 
+    public void setClientLoans(Set<ClientLoan> clientLoans) {
+        this.clientLoans = clientLoans;
+    }
     public Long getId() {
         return id;
     }

@@ -14,8 +14,6 @@ import java.util.Set;
 
 @SpringBootApplication
 public class HomebankingApplication {
-@Autowired
-private PasswordEncoder passwordEncoder;
 public static void main(String[] args) {
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
@@ -30,8 +28,8 @@ public static void main(String[] args) {
 			LocalDate date = LocalDate.now();
 			LocalDate pushdate = LocalDate.now().plusDays(1);
 			LocalDate pushdateYear = LocalDate.now().plusYears(5);
-			Client client1 = new Client("Juan", "faella", "juan@gmail.com", passwordEncoder.encode("123"));
-			Client client2 = new Client("Melba", "Morel", "melba@mindhub.com", passwordEncoder.encode("1234")  );
+			Client client1 = new Client("Juan", "faella", "juan@gmail.com","123");
+			Client client2 = new Client("Melba", "Morel", "melba@mindhub.com" , "123");
 
 			Account account1 = new Account("VIN001", 5000.00, date);
 			Account account2 = new Account("VIN002", 7500.00, pushdate);

@@ -76,6 +76,14 @@ public class Transaction {
         this.account = account;
     }
 
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "Transaction{" +

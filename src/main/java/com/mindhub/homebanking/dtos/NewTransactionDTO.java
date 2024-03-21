@@ -1,4 +1,7 @@
 package com.mindhub.homebanking.dtos;
 
-public record NewTransactionDTO(String destinationAccountNumber, String sourceAccountNumber, Double amount, String description ) {
+import java.time.LocalDateTime;
+import java.util.Date;
+
+public record NewTransactionDTO(String destinationAccountNumber, String sourceAccountNumber, Double amount, String description) {
 }

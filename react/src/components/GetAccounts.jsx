@@ -13,7 +13,7 @@ const GetAccounts = ({ id, number, creationDate, balance }) => {
                         </div>
                     </div>
                     <div className="flex items-center px-5">
-                        <div className>
+                        <div>
                             <p className="text-xs text-gray-300">Id Account</p>
                             <p className="mt-2 text-base sm:text-lg md:text-xl 2xl:text-2xl text-gray-50">{id}</p>
                         </div>

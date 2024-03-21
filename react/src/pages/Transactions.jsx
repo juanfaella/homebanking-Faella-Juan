@@ -1,30 +1,44 @@
-import React from "react"; 
-import { getdata } from "../utils/getData";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const Transactions = () => {
-    const cardData = getdata(1)
+const TransfersPage = () => {
+    const [transfers, setTransfers] = useState([]);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetchTransfers();
+    }, []);
+
+    const fetchTransfers = async () => {
+        try {
+            const response = await axios.get("/api/transaction");
+            setTransfers(response.data);
+            console.log(response.data);
+
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
     return (
         <main>
-            <h1>Aqui va un Form de new Card</h1>
-            <form>
-                <label htmlFor="cardType">Card Type
-                    <select name="cardType" id="cardType">
-                        <option value="DEBIT">DEBIT</option>
-                        <option value="CREDIT">CREDIT</option>
-                    </select>
-                </label>
-                <label htmlFor="cardColor">Card Color
-                    <select name="cardColor" id="cardColor">
-                        <option value="GOLD">GOLD</option>
-                        <option value="SILVER">SILVER</option>
-                        <option value="TITANIUM">TITANIUM</option>
-                    </select>
-                </label>
-                <Link to="/cards">Crear Tarjeta</Link>
-            </form>
+            <div className="container mx-auto ">
+                <h1 className="text-2xl font-bold my-6">Transfer History</h1>
+                {error && <p>Error: {error}</p>}
+                <div className="flex flex-col ">
+                    {transfers.map((transfer) => (
+                        <div key={transfer.id} className="bg-gray-100 p-4 my-2 pl-8 rounded-md">
+                            <p>From: {transfer.sourceAccountNumber}</p>
+                            <p>To: {transfer.destinationAccountNumber}</p>
+                            <p>Amount: {transfer.amount}</p>
+                            <p>Description: {transfer.description}</p>
+                
+                        </div>
+                    ))}
+                </div>
+            </div>
         </main>
-    )
-}
+    );
+};
 
-export default Transactions;
+export default TransfersPage;

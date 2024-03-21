@@ -1,6 +1,7 @@
 package com.mindhub.homebanking.controllers;
 
 import com.mindhub.homebanking.dtos.NewTransactionDTO;
+import com.mindhub.homebanking.dtos.TransactionDTO;
 import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.models.Transaction;
@@ -15,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/transaction")
@@ -65,13 +68,13 @@ public class TransactionController {
         destination.setBalance(destination.getBalance() + newTransactionDTO.amount());
 
         Transaction transactionOrigin = new Transaction(TransactionType.DEBIT, (-newTransactionDTO.amount()),
-                newTransactionDTO.description(),LocalDateTime.now(), newTransactionDTO.sourceAccountNumber(),
+                newTransactionDTO.description(), LocalDateTime.now(), newTransactionDTO.sourceAccountNumber(),
                 newTransactionDTO.destinationAccountNumber());
 
         origin.addTransaction(transactionOrigin);
 
         Transaction transactionDestination = new Transaction(TransactionType.CREDIT, newTransactionDTO.amount(),
-                newTransactionDTO.description(),LocalDateTime.now(), newTransactionDTO.sourceAccountNumber(),
+                newTransactionDTO.description(), LocalDateTime.now(), newTransactionDTO.sourceAccountNumber(),
                 newTransactionDTO.destinationAccountNumber());
 
         destination.addTransaction(transactionDestination);
@@ -84,5 +87,15 @@ public class TransactionController {
 
 
         return ResponseEntity.ok("success");
+    }
+    @GetMapping
+    public ResponseEntity<List<TransactionDTO>> getTransfers() {
+        List<Transaction> transfers = transactionRepository.findAll();
+
+        List<TransactionDTO> transferDTOs = transfers.stream()
+                .map(TransactionDTO::new)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(transferDTOs);
     }
 }

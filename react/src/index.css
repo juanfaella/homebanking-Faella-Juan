@@ -7,3 +7,15 @@
   padding: 0;
   box-sizing: content-box;
 }
+
+.card-gold {
+  background-color: gold;
+}
+
+.card-silver {
+  background-color: silver;
+}
+
+.card-titanium {
+  background-color: #aaa;
+}

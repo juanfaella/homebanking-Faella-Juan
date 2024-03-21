@@ -29,6 +29,7 @@ public class LoanController {
     private LoanRepository loanRepository;
     @Autowired
     private TransactionRepository transactionRepository;
+
     @PostMapping("/loan")
     @Transactional
     public ResponseEntity<?> loan(@RequestBody NewLoanDTO newLoanDTO){
@@ -60,7 +61,7 @@ public class LoanController {
             return ResponseEntity.badRequest().body("Destination account does not belong");
         }
         ClientLoan clientLoan = new ClientLoan(newLoanDTO.amount(),newLoanDTO.payments(),client,existingLoan);
-        Transaction transaction = new Transaction(TransactionType.CREDIT, newLoanDTO.amount()*1.2,"LOAN NEW", LocalDateTime.now(),newLoanDTO.DestinationAccountNumber(),newLoanDTO.DestinationAccountNumber());
+        Transaction transaction = new Transaction(TransactionType.CREDIT, newLoanDTO.amount()*1.2,"LOAN NEW", LocalDateTime.now(), "Bank Finance", newLoanDTO.DestinationAccountNumber());
         Account account = accountRepository.findByNumber(newLoanDTO.DestinationAccountNumber());
         account.setBalance(account.getBalance() + newLoanDTO.amount());
         client.addClientLoan(clientLoan);

@@ -4,7 +4,7 @@ import GetCards from '../components/GetCards'
 import { Link } from 'react-router-dom'
 
 const CardsView = () => {
-  const client = getdata(2)
+  const client = getdata()
   console.log(client)
   const renderCards= () => {
     if (!client || !client.cards || client.cards.length === 0) {
@@ -20,14 +20,14 @@ const CardsView = () => {
     }
   };
   return (
-    <main className=''>
-      <div className='h-96 flex flex-col items-center justify-around'>
-      <div>
-        <h1 className='font-semibold'>Cards</h1>
-        <Link to={"/cards/new"}>Get Card</Link>
-      </div>
-      {renderCards()}
-    </div>
+    <main>
+        <div className='flex flex-col gap-5 items-center m-5'>
+          <h1 className='font-bold'>Cards</h1>
+          <Link className='bg-blue-500 text-white p-1 rounded-xl hover:bg-blue-900' to={"/cards/new"}>Get Card</Link>
+          <div className='flex gap-10 justify-center flex-wrap items-center'>
+           {renderCards()}
+          </div>
+       </div>
     </main>
   )
 }

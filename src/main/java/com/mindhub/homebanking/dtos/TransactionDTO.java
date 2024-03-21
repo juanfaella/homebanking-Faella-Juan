@@ -2,6 +2,8 @@ package com.mindhub.homebanking.dtos;
 
 import com.mindhub.homebanking.models.Transaction;
 
+import java.time.LocalDateTime;
+
 
 public class TransactionDTO {
     private Long id;
@@ -10,6 +12,8 @@ public class TransactionDTO {
     private String description;
     private String destinationAccountNumber;
     private String sourceAccountNumber;
+
+    private LocalDateTime localDateTime;
 
     public TransactionDTO() {
     }
@@ -21,7 +25,11 @@ public class TransactionDTO {
         this.description = transaction.getDescription();
         this.destinationAccountNumber = transaction.getDestinationAccountNumber();
         this.sourceAccountNumber = transaction.getSourceAccountNumber();
+        this.localDateTime = transaction.getDate();
+
     }
+
+
     public String getSourceAccountNumber() {
         return sourceAccountNumber;
     }

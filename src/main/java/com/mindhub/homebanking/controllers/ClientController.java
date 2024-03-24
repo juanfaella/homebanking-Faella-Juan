@@ -33,12 +33,12 @@ public class ClientController {
     private LoanRepository clientLoanRepository;
     @Autowired
     private CardRepository cardRepository;
-
     @GetMapping("/")
     public ResponseEntity<List<ClientDTO>> getAllClients(){
         List<Client> clients =  clientRepository.findAll();
         return new ResponseEntity<>(clients.stream().map(ClientDTO::new).collect(Collectors.toList()), HttpStatus.OK);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getOnePersonById(@PathVariable Long id){

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const TransfersPage = () => {
     const [transfers, setTransfers] = useState([]);
@@ -36,7 +37,9 @@ const TransfersPage = () => {
                         </div>
                     ))}
                 </div>
+                <Link to={"/transfer/new"} className="text-white mt-10 p-2 cursor-pointer hover:font-bold bg-emerald-700  rounded-xl">Get Transfer</Link>
             </div>
+
         </main>
     );
 };

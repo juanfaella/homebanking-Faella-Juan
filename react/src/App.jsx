@@ -15,6 +15,7 @@ import SignIn from './pages/SignIn'
 import { withAuth } from './hocs/withAuth'
 import SignUp from './pages/SignUp'
 import 'react-toastify/dist/ReactToastify.css'
+import NewTransfer from './pages/NewTransfer'
 
 function App() {
 
@@ -25,7 +26,7 @@ function App() {
   const NewLoansWithAuth = withAuth(NewLoan)
   const NewAccountWithAuth = withAuth(NewAccount)
   const NewCardWithAuth = withAuth(NewCard)
-   
+  const NewTransferWithAuth = withAuth(NewTransfer)
 
   return (
     
@@ -44,7 +45,7 @@ function App() {
             <Route path='/' element={<SignIn/>}/>
             <Route path='/signup' element={<SignUp/>}/>
             <Route path='/transfer' element={<Transactions/>}/>
-
+            <Route path='/transfer/new' element={<NewTransferWithAuth/>}/>
 
           </Routes>
         <Footer/>
